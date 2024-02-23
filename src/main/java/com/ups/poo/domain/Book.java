@@ -6,13 +6,13 @@ import java.util.Objects;
 
 @Entity
 public class Book {
-    @Id//autogenerable
-    @GeneratedValue(strategy = GenerationType.AUTO)//se genera la id automaticamente
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
-    private  String title;
+    private String title;
     private String editorial;
     @ManyToOne
-    @JoinColumn(name = "author_id", nullable = true)//NN
+    @JoinColumn(name = "author_id")
     private Author author;
 
     public Book() {
@@ -21,6 +21,14 @@ public class Book {
     public Book(String title, String editorial) {
         this.title = title;
         this.editorial = editorial;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
     }
 
     public String getTitle() {
@@ -47,17 +55,25 @@ public class Book {
         this.author = author;
     }
 
+    public Author getAuthors() {
+        return author;
+    }
+
+    public void setAuthors(Author author) {
+        this.author = author;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return title.equals(book.title) && editorial.equals(book.editorial) && author.equals(book.author);
+        return Objects.equals(Id, book.Id) && Objects.equals(title, book.title) && Objects.equals(editorial, book.editorial) && Objects.equals(author, book.author);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id);
+        return Objects.hash(Id, title, editorial, author);
     }
 
     @Override
@@ -69,3 +85,4 @@ public class Book {
                 '}';
     }
 }
+

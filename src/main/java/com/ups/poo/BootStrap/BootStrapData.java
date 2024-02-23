@@ -29,8 +29,8 @@ public class BootStrapData implements CommandLineRunner {
         book2.setEditorial("Disney");
 
         Author author1 = new Author("Betty", "Melso");
-        author1.getBookList().add(book1);
-        author1.getBookList().add(book2);
+        author1.getBooks().add(book1);
+        author1.getBooks().add(book2);
 
         Book book3 = new Book();
         book3.setTitle("One piece");
@@ -41,8 +41,8 @@ public class BootStrapData implements CommandLineRunner {
         book4.setEditorial("Disney");
 
         Author author2 = new Author("Betty", "Melso");
-        author2.getBookList().add(book3);
-        author2.getBookList().add(book4);
+        author2.getBooks().add(book3);
+        author2.getBooks().add(book4);
         //save object in entities
         bookRepository.save(book1);
         bookRepository.save(book2);

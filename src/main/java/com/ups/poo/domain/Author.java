@@ -1,35 +1,45 @@
 package com.ups.poo.domain;
 
 import jakarta.persistence.*;
-import com.ups.poo.domain.Book;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
-@Entity//una notacion jpa para definir como un modelo de bases de datos entidad
-
+@Entity
 public class Author {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;// long tiene mas capacidad
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
-    private String lastName;
+    private String lastname;
     @OneToMany(mappedBy = "author")
-    //para definir un autor va tener varios libros
-    private List<Book> bookList = new ArrayList<Book>();
+    //@JoinColumn(name = "author_id")
+    private Set<Book> books = new HashSet<>();
 
     public Author() {
     }
 
-    public Author(String name, String lastName) {
+    public Author(String name, String lastname) {
         this.name = name;
-        this.lastName = lastName;
+        this.lastname = lastname;
     }
 
-    public Author(String name, String lastName, List<Book> bookList) {
+    public Author(Long id, String name, String lastname, Set<Book> books) {
+        this.id = id;
         this.name = name;
-        this.lastName = lastName;
-        this.bookList = bookList;
+        this.lastname = lastname;
+        this.books = books;
+    }
+
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -40,20 +50,20 @@ public class Author {
         this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public List<Book> getBookList() {
-        return bookList;
+    public Set<Book> getBooks() {
+        return books;
     }
 
-    public void setBookList(List<Book> bookList) {
-        this.bookList = bookList;
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 
     @Override
@@ -61,7 +71,7 @@ public class Author {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Author author = (Author) o;
-        return id.equals(author.id) && name.equals(author.name) && lastName.equals(author.lastName) && bookList.equals(author.bookList);
+        return Objects.equals (id, author.id) && Objects.equals(name, author.name) && Objects.equals(lastname, author.lastname) && Objects.equals(books, author.books);
     }
 
     @Override
@@ -74,7 +84,9 @@ public class Author {
         return "Author{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", lastname='" + lastname + '\'' +
                 '}';
     }
 }
+
+
