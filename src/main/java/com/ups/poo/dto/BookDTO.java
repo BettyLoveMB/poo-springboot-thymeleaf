@@ -3,6 +3,8 @@ package com.ups.poo.dto;
 public class BookDTO {
     private String title;
     private String editorial;
+    private AuthorDTO authorDTO;
+    private String publisher;
 
     public BookDTO() {
     }
@@ -26,5 +28,21 @@ public class BookDTO {
 
     public void setEditorial(String editorial) {
         this.editorial = editorial;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public AuthorDTO getAuthorDTO() {
+        return authorDTO;
+    }
+
+    public void setAuthorDTO(AuthorDTO authorDTO) {
+        this.authorDTO = authorDTO;
     }
 }
